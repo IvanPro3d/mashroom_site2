@@ -18,6 +18,34 @@
   box-sizing: border-box;
 }
 
+/* FRAGMENTMONO */
+@font-face {
+  font-family: 'Fragment Mono';
+  src: url('fonts/FRAGMENTMONO-REGULAR.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fragment Mono';
+  src: url('fonts/FRAGMENTMONO-ITALIC.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* TD-VYAZBIT */
+@font-face {
+  font-family: 'TD-Vyazbit';
+  src: url('fonts/TD-VYAZBIT.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+  font-family: 'TD Vyazbit', sans-serif;
+}
+
+
 html,
 body {
   margin: 0;
