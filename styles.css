@@ -1,0 +1,1824 @@
+/* Базовые переменные и шрифты */
+:root {
+  --bg-color: #e6e6e6;
+  --bg-alt: #d9d9d9;
+  --accent: #2c2c2c;
+  --accent-dark: #252525;
+  --text-main: #252525;
+  --text-muted: #595959;
+  --border-soft: rgba(37, 37, 37, 0.12);
+  --radius-card: 18px;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.12);
+  --header-height: 47px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: "Fragment Mono", system-ui, -apple-system, BlinkMacSystemFont,
+    "Fragment Mono", monospace;
+  scroll-behavior: smooth;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  padding-top: var(--header-height);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* Шапка */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--header-height);
+  background: #e6e6e6;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-soft);
+  z-index: 20;
+}
+
+.site-header-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.logo {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  letter-spacing: 0.18em;
+  font-size: 24px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: 0;
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 24px;
+}
+
+.main-nav a {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding-bottom: 4px;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--accent);
+  transition: width 0.18s ease-out;
+}
+
+.main-nav a:hover::after,
+.main-nav a:focus-visible::after {
+  width: 100%;
+}
+
+.nav-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-soft);
+  background: #e6e6e6;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  width: 20px;
+  height: 2px;
+  background: var(--text-main);
+  position: relative;
+}
+
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--text-main);
+}
+
+.nav-toggle span::before {
+  top: -6px;
+}
+
+.nav-toggle span::after {
+  top: 6px;
+}
+
+/* Кнопки */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #e9e9e9;
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s ease-out, transform 0.16s ease-out;
+  width: 330px;
+}
+
+.btn:hover {
+  background: var(--accent-dark);
+  transform: translateY(-1px) scale(1.03);
+}
+
+.btn:active {
+  transform: translateY(0) scale(1);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border-soft);
+}
+
+.btn-ghost:hover {
+  background: #f0e7d8;
+}
+
+/* Заголовки */
+.section-title {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: clamp(28px, 4vw, 38px);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.section-subtitle {
+  margin: 0 0 32px;
+  color: var(--text-muted);
+  font-size: 14px;
+  max-width: 480px;
+}
+
+/* Главный блок — полноэкранное изображение */
+.hero {
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+}
+
+.hero-full-image {
+  position: relative;
+  flex: 1;
+  background-image: url("images/about/Glavnaya.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 900px) {
+
+  .hero-full-image {
+    content: url("images/ui/mobileGlavnaya.png");
+    height: 700px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+}
+
+.hero-full-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 60px 160px;
+}
+
+.hero-full-caption {
+  max-width: 600px;
+  text-align: left;
+}
+
+.hero-full-caption-title {
+  font-family: "TD Vyazbit", "Fragment Mono", serif;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: clamp(26px, 3vw, 32px);
+  margin-bottom: 16px;
+}
+
+.hero-full-caption-text {
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: right;
+
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-text {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.hero-text p {
+  margin: 0 0 12px;
+}
+
+.hero-meta {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.hero-photo-card {
+  padding: 24px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 18px;
+}
+
+.hero-photo {
+  background: #e6e6e6;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+}
+
+.hero-photo::after {
+  content: "ручная\\работа";
+  white-space: pre;
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  padding: 6px 14px;
+  background: rgba(230, 230, 230, 0.9);
+  font-family: "Fragment Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-photo-figure {
+  position: absolute;
+  inset: 18px 20px 36px 22px;
+  border: 1px dashed rgba(248, 242, 232, 0.8);
+}
+
+.hero-note {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.hero-note span {
+  max-width: 260px;
+}
+
+/* Карточки товаров */
+.products-section {
+  padding: 40px 0 80px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.featured-item {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featured-item img {
+  max-height: 100%;
+  width: auto;
+  height: 600px;
+  object-fit: cover;
+  background: #e6e6e6;
+  display: block;
+}
+
+
+.products-cta {
+  margin-top: 28px;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+
+  .featured-item {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .featured-item img {
+    width: 100%;
+  }
+
+}
+
+
+/* Общие секции для внутренних страниц */
+.page-section {
+  padding: 40px 0 72px;
+}
+
+.page-header {
+  padding: 28px 0 12px;
+  border-bottom: 1px solid var(--border-soft);
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: clamp(26px, 3.4vw, 32px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.page-intro {
+  margin-top: 12px;
+  max-width: 1000px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+
+.sizes-table-wrapper {
+  margin-top: 40px;
+  background: #f2f2f2;
+  padding: 20px 22px 22px;
+  overflow-x: auto;
+}
+
+.sizes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.sizes-table th,
+.sizes-table td {
+  padding: 10px 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.sizes-table th {
+  font-weight: 600;
+  font-family: "Fragment Mono", monospace;
+  color: var(--text-muted);
+}
+
+.sizes-table tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.sizes-note {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Каталог */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.product-card {
+  display: block;
+}
+
+.product-card-media {
+  position: relative;
+}
+
+.product-card-media img {
+  width: 100%;
+  aspect-ratio: 600 / 600;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-card-title,
+.product-card-price {
+  font-family: "Fragment Mono", monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #777777;
+}
+
+/* Страница товара */
+.product-layout {
+  display: flex;
+  gap: 60px;
+  padding: 120px 0;
+}
+
+.product-gallery {
+  position: relative;
+  width: 500px;
+}
+
+.gallery-track img {
+  width: 100%;
+  display: none;
+}
+
+.gallery-track img.active {
+  display: block;
+}
+
+.gallery-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #2C2C2C;
+  color: #E6E6E6;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
+
+.product-info {
+  max-width: 450px;
+}
+
+.order-button {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 28px;
+  background: #2C2C2C;
+  color: #E6E6E6;
+  text-decoration: none;
+  border-radius: 6px; /* единственное допустимое скругление */
+}
+
+
+.product-main-image {
+  position: relative;
+  overflow: hidden;
+  background: #d9d9d9;
+  aspect-ratio: 4 / 5;
+  cursor: zoom-in;
+}
+
+.product-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.22s ease-out;
+}
+
+.product-main-image.is-zoomed img {
+  transform: scale(1.3);
+}
+
+.product-main-image-hint {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  padding: 4px 10px;
+  background: rgba(230, 230, 230, 0.9);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-thumbs {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.product-thumb {
+  flex: 1;
+  background: linear-gradient(135deg, #d9d9d9, #a6a6a6);
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 1px solid transparent;
+  transition: opacity 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+.product-thumb.is-active {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-gallery-controls {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.product-gallery-controls-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.product-gallery-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.product-gallery-dot.is-active {
+  background: var(--accent);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.product-name {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 26px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product-price-main {
+  font-size: 18px;
+}
+
+.product-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.product-details {
+  border-top: 1px solid #e5e5e5;
+  margin-top: 32px;
+}
+
+.product-details-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.product-details-trigger {
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-details-trigger::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  transition: transform 0.2s ease;
+}
+
+.product-details-item.is-open .product-details-trigger::after {
+  content: "−";
+}
+
+.product-details-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  color: #A1A1A1;
+}
+
+.product-details-item.is-open .product-details-content {
+  padding-bottom: 16px;
+  max-height: 2000px;
+  opacity: 1;
+  transform: translateY(0);
+  color: #A1A1A1;
+}
+
+.product-details-block {
+  padding: 12px 14px;
+  background: #f2f2f2;
+}
+
+.product-details-label {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.product-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.product-contact-note {
+  color: var(--text-muted);
+}
+
+/* Лайтбокс */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox.is-visible {
+  display: flex;
+}
+
+.lightbox-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.lightbox-image-wrapper {
+  max-width: 95vw;
+  max-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lightbox-image-wrapper img {
+  max-width: 100%;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+.lightbox-caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(245, 241, 234, 0.8);
+  text-align: center;
+}
+
+/* Ткани */
+.fabrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.fabric-card {
+  background: transparent;
+  padding: 14px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.fabric-media {
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 4 / 3;
+}
+
+.fabric-title {
+  font-size: 14px;
+}
+
+.fabric-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px dashed rgba(233, 233, 233, 0.6);
+  color: var(--text-muted);
+}
+
+/* Доставка на главной */
+.delivery {
+  padding: 20px 0 72px;
+}
+
+.delivery-card {
+  background: #f2f2f2;
+  padding: 22px 20px 20px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 20px;
+}
+
+.delivery-title {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.delivery-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+
+.delivery-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
+}
+
+/* Блок о бренде */
+.about-brand {
+  padding: 80px 0;
+}
+
+.about-brand-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: center;
+}
+
+.about-brand-image {
+  width: 100%;
+  height: 500px;
+  background-image: url("images/about/aboutMasha.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.about-brand-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-brand-title {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 60px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.about-brand-subtitle {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 60px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.about-brand-text {
+  font-family: "Fragment Mono", monospace;
+  font-size: 20px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Футер */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid #2c2c2c;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    url("images/ui/podval.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-footer-inner {
+  padding: 430px 0 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr);
+  gap: 550px;
+  flex: 1;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.footer-logo img {
+  max-width: 200px;
+  height: auto;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 160px;
+}
+
+.footer-column-title {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 30px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #e9e9e9;
+}
+
+.footer-column-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-column-links a {
+  font-family: "Fragment Mono", monospace;
+  font-size: 20px;
+  color: #595959;
+  text-decoration: none;
+  transition: color 0.15s ease-out;
+}
+
+.footer-column-links a:hover {
+  color: #e9e9e9;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(233, 233, 233, 0.1);
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 250px;
+}
+
+.footer-bottom-link {
+  font-family: "Fragment Mono", monospace;
+  font-size: 18px;
+  color: #595959;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: color 0.15s ease-out;
+}
+
+.footer-bottom-link:hover {
+  color: #e9e9e9;
+}
+
+.footer-brand-text {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 48px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e9e9e9;
+  text-align: center;
+  padding: 20px 0;
+}
+
+@media (max-width: 900px) {
+  .footer-logo {
+    margin-top: 30px;
+  }
+  
+
+  .site-footer-inner {
+    padding-top: 30px;
+  }
+
+  .footer-logo img {
+    max-width: 160px;
+  }
+
+  .footer-column-title {
+    font-size: 25px;
+  }
+
+  .footer-column-links a {
+    font-size: 18px;
+  }
+
+}
+
+
+
+/* Адаптивность */
+@media (max-width: 900px) {
+  body {
+    padding-top: 47px;
+  }
+
+  .site-header-inner {
+    gap: 16px;
+  }
+
+  .main-nav {
+    position: fixed;
+    inset: var(--header-height) 0 auto 0;
+    background: #e6e6e6;
+    flex-direction: column;
+    padding: 14px 20px 18px;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.16s ease-out, transform 0.16s ease-out;
+  }
+
+  .main-nav.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .hero-grid,
+  .steps-grid,
+  .product-layout,
+  .delivery-card,
+  .site-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-photo {
+    min-height: 220px;
+  }
+
+  .products-grid,
+  .catalog-grid,
+  .fabrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* --- Мобильная версия — главная страница (исправлено) --- */
+@media (max-width: 640px) {
+
+   /* --- Три вводных блока --- */
+  .intro-column + .intro-column,
+  .intro-columns-grid {
+    border-left: none !important; /* убираем вертикальные линии */
+  }
+
+  .intro-column {
+    border-top: 1px solid rgba(0,0,0,0.15); /* горизонтальная линия сверху каждого блока кроме первого */
+    padding: 16px 0;
+    min-height: auto;
+  }
+
+  .intro-column:first-child {
+    border-top: none;
+  }
+
+  .intro-column-text {
+    font-size: 28px;
+    line-height: 1.4;
+  }
+
+  /* --- Изображения: фиксированный размер и маленький gap --- */
+  .featured-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* расстояние между изображениями */
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-right: 4px;
+  }
+
+  .featured-item {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    height: 600px; /* фиксированная высота */
+  }
+
+  .featured-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .featured-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .products-section {
+    padding: 20px 0 40px;
+  }
+}
+
+
+
+
+/* Три вводных столбика на главной */
+.intro-columns {
+  padding: 60px 0 40px;
+}
+
+.intro-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.intro-column {
+  min-height: 420px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 18px;
+}
+
+.intro-column-text {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 40px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.intro-column + .intro-column {
+  border-left: 1px solid #252525;
+}
+
+@media (max-width: 900px) {
+  .intro-columns-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .intro-column {
+    min-height: 160px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+    flex-direction: column;
+  }
+
+  .about-brand-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    
+  }
+
+  .about-brand-title,
+  .about-brand-subtitle {
+    font-size: 40px;
+    
+  }
+
+  .site-footer-inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+    
+  }
+
+  .footer-columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .products-grid,
+  .catalog-grid,
+  .fabrics-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .product-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero {
+    padding-top: 32px;
+  }
+
+  .products-section {
+    padding-bottom: 56px;
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 0;
+  }
+
+  .products-section img {
+    min-width: 100%;
+    scroll-snap-align: start;
+  }
+}
+
+.product-gallery {
+  position: relative;
+}
+
+.product-gallery-arrows {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.gallery-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  transition: 0.2s ease;
+}
+
+.gallery-arrow-prev {
+  left: 12px;
+  background: rgba(255,255,255,0.85);
+  color: #111;
+}
+
+.gallery-arrow-next {
+  right: 12px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+}
+
+.gallery-arrow:hover {
+  transform: translateY(-50%) scale(1.08);
+}
+
+.gallery-next-preview {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 90px;
+  overflow: hidden;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.gallery-next-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.product-info {
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+  width: 420px;
+}
+
+.product-scroll-gallery {
+  width: 600px;
+}
+
+.scroll-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-image-item img {
+  width: 700px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  cursor: zoom-in;
+}
+
+.scroll-image-item img:hover {
+  cursor: url("images/ui/cursor-mushroom.png") 20 20, auto;
+}
+
+
+/* Мерки — чистая двухколоночная структура */
+
+.measurements-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 80px 0;
+}
+
+
+
+.measurements-text {
+  width: 620px;
+  font-family: "Fragment Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+}
+
+.measurements-text h3 {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin: 30px 0 10px;
+}
+
+.measurements-text p {
+  margin: 0;
+}
+
+.measurements-text ul {
+  margin: 6px 0 14px 18px;
+  padding: 0;
+}
+
+.measurements-text li {
+  margin-bottom: 6px;
+}
+
+.measurements-section {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 30px;
+  margin-top: 40px;
+}
+
+
+.measurements-image {
+  width: 720px;
+  position: sticky;
+  top: 120px;
+}
+
+.measurements-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.measurements-title {
+  font-family: "Fragment Mono", monospace;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+  margin: 40px 0 16px;
+}
+
+/* --- Мобильная версия measurements.html --- */
+@media (max-width: 640px) {
+  .measurements-layout {
+    flex-direction: column;
+  }
+
+  .measurements-image {
+    position: static !important;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .measurements-image img {
+    position: static !important;
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+  }
+  
+
+  .measurements-layout .page-intro {
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
+    margin-top: 0;
+  }
+
+/* --- Measurements mobile --- */
+
+.measurements-layout {
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.measurements-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.measurements-image img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.measurements-text {
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+
+}
+
+
+/* Ткани — аккордеон (в стиле product-details) */
+
+.fabrics-category {
+  border-top: 1px solid #e5e5e5;
+  margin-top: 32px;
+}
+
+.fabrics-category:last-child {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.fabrics-trigger {
+  width: 100%;
+  padding: 18px 0;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+}
+
+.fabrics-trigger::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  transition: transform 0.2s ease;
+}
+
+.fabrics-category.is-open .fabrics-trigger::after {
+  content: "−";
+}
+
+.fabrics-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  color: #A1A1A1;
+}
+
+.fabrics-content-inner {
+  padding: 12px 0 0;
+}
+
+.fabrics-category.is-open .fabrics-content {
+  max-height: none;
+  padding-bottom: 16px;
+  color: #A1A1A1;
+  padding-bottom: 30px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+.fabric-item {
+  text-align: center;
+  overflow: hidden;
+}
+
+.fabrics-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.fabric-item img {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 auto;
+
+  transition: transform 500ms ease;
+  transform-origin: center;
+}
+
+.fabric-item:hover img {
+  transform: scale(1.06) rotate(-1.5deg);
+}
+
+
+.fabric-item-title {
+  margin-top: 10px;
+  font-family: "Fragment Mono", monospace;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #777777;
+}
+
+.legal-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-link:hover {
+  opacity: 0.6;
+}
+
+
+
+
+.btn.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+  filter: grayscale(40%);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  padding: 14px 28px;
+  font-size: 24px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  min-width: 220px;
+}
+
+
+@media (max-width: 900px) {
+
+  .site-header-inner {
+    justify-content: space-between;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+  
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  
+    background: #e6e6e6;
+    padding: 40px 20px;
+  
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+  
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .main-nav.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+  }
+
+  .nav-toggle span,
+.nav-toggle span::before,
+.nav-toggle span::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-main);
+  position: relative;
+}
+
+.nav-toggle span::before,
+.nav-toggle span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav-toggle span::before {
+  top: -6px;
+}
+
+.nav-toggle span::after {
+  top: 6px;
+}
+
+
+  /* --- PRODUCT MOBILE LAYOUT --- */
+
+.product-layout {
+  flex-direction: column;
+  gap: 40px;
+}
+
+.product-info {
+  position: static;
+  width: 100%;
+}
+
+.product-scroll-gallery {
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+
+  .scroll-images {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-image-item {
+    min-width: 100%;
+    scroll-snap-align: start;
+  }
+
+  .scroll-image-item img {
+    width: 100%;
+    height: auto;
+  }
+
+}
+}
+
+/* --- Mobile Back Button --- */
+.mobile-back-button {
+  display: none;
+}
+
+@media (max-width: 900px) {
+
+  .mobile-back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    bottom: 20px;
+    left: 16px;
+
+    padding: 10px 16px;
+    font-size: 14px;
+    font-family: "Fragment Mono", monospace;
+
+    background: rgba(44,44,44,0.9);
+    color: #e6e6e6;
+    border: none;
+    border-radius: 999px;
+
+    z-index: 9999;
+    cursor: pointer;
+
+    backdrop-filter: blur(6px);
+    transition: 0.2s ease;
+  }
+
+  .mobile-back-button:active {
+    transform: scale(0.96);
+  }
+
+}
+
+/* --- Cookie Banner --- */
+
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 680px;
+
+  background: rgba(44, 44, 44, 0.95);
+  backdrop-filter: blur(10px);
+
+  color: #e6e6e6;
+  padding: 20px;
+  border-radius: 16px;
+
+  z-index: 9999;
+  display: none;
+}
+
+.cookie-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cookie-text {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.cookie-text a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cookie-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.cookie-accept {
+  background: #ffffff;
+  color: #2c2c2c;
+}
+
+.cookie-decline {
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+
+
+
+
