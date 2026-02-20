@@ -4,22 +4,6 @@
       {
         "src": "*.html",
         "use": "@vercel/static"
-      },
-      {
-        "src": "styles.css",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "main.js",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "fonts/**",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "images/**",
-        "use": "@vercel/static"
       }
     ],
     "routes": [
@@ -27,5 +11,7 @@
         "src": "/(.*)",
         "dest": "/$1"
       }
-    ]
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
   }
