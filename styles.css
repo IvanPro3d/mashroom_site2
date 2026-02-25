@@ -811,6 +811,7 @@ body {
   text-align: center;
 }
 
+
 /* Ткани */
 .fabrics-grid {
   display: grid;
@@ -1846,7 +1847,25 @@ body {
   border: 1px solid #ffffff;
 }
 
+/* --- FABRICS MOBILE --- */
+@media (max-width: 640px) {
 
+  .fabrics-items {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  .fabric-item img {
+    max-width: 100%;
+  }
+
+  .fabric-item-title {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+}
 
 
 
