@@ -560,6 +560,12 @@ body {
   border-radius: 6px; /* единственное допустимое скругление */
 }
 
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: "Fragment Mono", monospace;
+}
 
 .product-main-image {
   position: relative;
@@ -1865,7 +1871,36 @@ body {
     margin-top: 8px;
   }
 
+  /* Убираем системный синий цвет ссылок */
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+a:active {
+  color: inherit;
+}
+
+a:focus {
+  outline: none;
+}
+
+/* Убираем мобильную подсветку при тапе */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+}
+
 
 
 
