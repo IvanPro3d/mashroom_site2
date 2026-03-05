@@ -3343,26 +3343,30 @@ a:focus {
     }
   }
 /* =================================
-   LOADING SCREEN — РОМАШКА
+   LOADING SCREEN — ИЗОЛИРОВАННЫЙ
 ================================= */
 
 .loading-screen {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   background: #e6e6e6;
   background-image: url("images/about/serye-tekstury.webp");
   background-size: 2000px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 999999; /* Максимальный z-index */
+  isolation: isolate; /* Изоляция контекста */
+  transform: translateZ(0); /* Отдельный слой */
 }
 
 .loading-screen.is-hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 .loading-content {
@@ -3370,12 +3374,12 @@ a:focus {
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  padding: 40px;
+  pointer-events: none; /* Не перехватывает клики */
 }
 
-/* Логотип */
-.loading-logo-minimal {
-  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+/* Логотип — только внутри загрузки */
+.loading-screen .loading-logo-minimal {
+  font-family: "TD Vyazbit", "Courier New", monospace;
   font-size: clamp(16px, 3vw, 40px);
   letter-spacing: 0.3em;
   color: #2c2c2c;
@@ -3392,31 +3396,26 @@ a:focus {
   }
 }
 
-/* Ромашка */
-.loading-daisy {
-  width: 40px;
-  height: 40px;
+/* Ромашка — только внутри загрузки */
+.loading-screen .loading-daisy {
+  width: 44px;
+  height: 44px;
   opacity: 0;
-  animation: daisyAppear 0.5s ease 0.2s forwards, daisySpin 1.5s linear infinite 0.4s;
+  animation: daisyAppear 0.5s ease 0.2s forwards, 
+             daisySpin 1.8s linear infinite 0.4s;
 }
 
-.daisy-petals {
-  transform-origin: center;
+.loading-screen .daisy-petals {
+  transform-origin: 30px 30px;
 }
 
 @keyframes daisyAppear {
-  to {
-    opacity: 0.9;
-  }
+  to { opacity: 0.95; }
 }
 
 @keyframes daisySpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Исчезновение */
@@ -3426,33 +3425,56 @@ a:focus {
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-/* Мобильная адаптация */
+/* Мобильная */
 @media (max-width: 768px) {
-  .loading-content {
+  .loading-screen .loading-content {
     gap: 28px;
   }
   
-  .loading-logo-minimal {
-    font-size: 25px;
-    letter-spacing: 0.25em;
+  .loading-screen .loading-logo-minimal {
+    font-size: 20px;
   }
   
-  .loading-daisy {
-    width: 36px;
-    height: 36px;
+  .loading-screen .loading-daisy {
+    width: 40px;
+    height: 40px;
   }
 }
 
-/* Уважение к prefers-reduced-motion */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .loading-logo-minimal {
+  .loading-screen .loading-logo-minimal {
     animation: none;
     opacity: 1;
     transform: none;
   }
   
-  .loading-daisy {
+  .loading-screen .loading-daisy {
     animation: daisyAppear 0.5s ease 0.2s forwards;
-    opacity: 0.9;
   }
+}
+
+/* =================================
+   ЭКСТРЕННЫЙ ФИКС ЗАГРУЗКИ
+================================= */
+
+#loadingScreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  display: flex !important;
+  background: #e6e6e6 !important;
+}
+
+#loadingScreen.is-hidden {
+  display: none !important;
+}
+
+/* Скрываем ромашку вне загрузки */
+.page .loading-daisy,
+.page .loading-logo-minimal {
+  display: none !important;
 }
