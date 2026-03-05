@@ -2659,3 +2659,800 @@ a:focus {
 
 }
 
+
+/* ============================================
+   БАЗОВЫЕ НАСТРОЙКИ (исправление белой линии)
+   ============================================ */
+
+   html, body {
+    background-color: #030303; /* Тёмный фон вместо белого */
+    min-height: 100%;
+  }
+  
+  .page {
+    background-color: var(--bg-color, #e6e6e6); /* Фон страницы */
+    min-height: 100vh;
+  }
+  
+  /* ============================================
+     УНИВЕРСАЛЬНЫЕ АНИМАЦИИ ДЛЯ ВСЕГО САЙТА
+     ============================================ */
+  
+  /* ============================================
+     1. ГЛАВНАЯ СТРАНИЦА (index.html)
+     ============================================ */
+  
+  /* Hero секция */
+  .hero-full-image {
+    opacity: 0;
+    animation: heroFadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  @keyframes heroFadeIn {
+    from {
+      opacity: 0;
+      transform: scale(1.05);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .hero-full-caption {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: captionFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+  }
+  
+  @keyframes captionFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Вводные колонки */
+  .intro-column {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, visibility, transform;
+  }
+  
+  .intro-column.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .intro-column:nth-child(1) { transition-delay: 0s; }
+  .intro-column:nth-child(2) { transition-delay: 0.1s; }
+  .intro-column:nth-child(3) { transition-delay: 0.2s; }
+  
+  /* Изображения товаров на главной — ВИДНЫ СРАЗУ */
+  .featured-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+  }
+  
+  /* Анимация только при прокрутке — добавляем класс через JS */
+  .featured-item.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(60px);
+  }
+  
+  .featured-item.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .featured-item.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+  .featured-item.animate-on-scroll:nth-child(2) { transition-delay: 0.15s; }
+  .featured-item.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+  
+  .featured-item img {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  
+  .featured-item:hover img {
+    transform: scale(1.03);
+  }
+  
+  /* Секция "О бренде" — ВИДНА СРАЗУ */
+  .about-brand-image,
+  .about-brand-content {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Анимация только при прокрутке */
+  .about-brand-image.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.9s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .about-brand-image.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .about-brand-content.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                visibility 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                transform 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+  
+  .about-brand-content.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  
+  /* ============================================
+     2. КАТАЛОГ (catalog.html)
+     ============================================ */
+  
+  /* Карточки товаров в каталоге — ВИДНЫ СРАЗУ */
+  .product-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .product-card.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(50px);
+  }
+  
+  .product-card.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .product-card.animate-on-scroll:nth-child(2n+1) { transition-delay: 0s; }
+  .product-card.animate-on-scroll:nth-child(2n) { transition-delay: 0.1s; }
+  
+  .product-card img {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+  
+  .product-card:hover img {
+    transform: scale(1.05);
+  }
+  
+  /* Заголовок страницы каталога */
+  .page-header {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: headerFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  @keyframes headerFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  
+  /* ============================================
+     3. СТРАНИЦА ТОВАРА (product-*.html)
+     ============================================ */
+  
+  /* Галерея товара — ВИДНА СРАЗУ */
+  .scroll-image-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .scroll-image-item.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .scroll-image-item.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .scroll-image-item.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+  .scroll-image-item.animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+  .scroll-image-item.animate-on-scroll:nth-child(3) { transition-delay: 0.2s; }
+  .scroll-image-item.animate-on-scroll:nth-child(4) { transition-delay: 0.3s; }
+  .scroll-image-item.animate-on-scroll:nth-child(5) { transition-delay: 0.4s; }
+  
+  /* Информация о товаре — ВИДНА СРАЗУ */
+  .product-info {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .product-info.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(30px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s,
+                visibility 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s,
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  }
+  
+  .product-info.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  /* Аккордеон плавное раскрытие */
+  .product-details-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.35s ease,
+                transform 0.35s ease;
+  }
+  
+  .product-details-item.is-open .product-details-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  
+  /* ============================================
+     4. ТКАНИ (fabrics.html)
+     ============================================ */
+  
+  /* Карточки тканей — ВИДНЫ СРАЗУ */
+  .fabric-card {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+  
+  .fabric-card.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fabric-card.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+  
+  .fabric-card.animate-on-scroll:nth-child(3n+1) { transition-delay: 0s; }
+  .fabric-card.animate-on-scroll:nth-child(3n+2) { transition-delay: 0.1s; }
+  .fabric-card.animate-on-scroll:nth-child(3n+3) { transition-delay: 0.2s; }
+  
+  /* Элементы внутри аккордеона тканей — ВИДНЫ СРАЗУ */
+  .fabric-item {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .fabric-item.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fabric-item.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Аккордеон категорий тканей — ВИДЕН СРАЗУ */
+  .fabrics-category {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .fabrics-category.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fabrics-category.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .fabrics-category.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+  .fabrics-category.animate-on-scroll:nth-child(2) { transition-delay: 0.15s; }
+  .fabrics-category.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+  
+  
+  /* ============================================
+     5. МЕРКИ (measurements.html)
+     ============================================ */
+  
+  /* Изображение мерок — ВИДНО СРАЗУ */
+  .measurements-image {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .measurements-image.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .measurements-image.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  /* Текстовый контент мерок — ВИДЕН СРАЗУ */
+  .measurements-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .measurements-text.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+  
+  .measurements-text.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  /* Таблица размеров — ВИДНА СРАЗУ */
+  .sizes-table-wrapper {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .sizes-table-wrapper.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .sizes-table-wrapper.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  
+  /* ============================================
+     6. ДОСТАВКА (delivery.html)
+     ============================================ */
+  
+  /* Карточка доставки — ВИДНА СРАЗУ */
+  .delivery-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .delivery-card.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .delivery-card.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Элементы списка доставки — ВИДНЫ СРАЗУ */
+  .delivery-list li {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .delivery-list.animate-on-scroll li {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-20px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .delivery-list.animate-on-scroll.is-visible li {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+  
+  .delivery-list.animate-on-scroll.is-visible li:nth-child(1) { transition-delay: 0s; }
+  .delivery-list.animate-on-scroll.is-visible li:nth-child(2) { transition-delay: 0.1s; }
+  .delivery-list.animate-on-scroll.is-visible li:nth-child(3) { transition-delay: 0.2s; }
+  .delivery-list.animate-on-scroll.is-visible li:nth-child(4) { transition-delay: 0.3s; }
+  
+  
+  /* ============================================
+     7. ПОДВАЛ (все страницы) — ВИДЕН СРАЗУ
+     ============================================ */
+  
+  .footer-logo,
+  .footer-column,
+  .footer-bottom,
+  .footer-brand-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Анимация только при прокрутке */
+  .footer-logo.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .footer-logo.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .footer-column.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .footer-column.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .footer-column.animate-on-scroll:nth-child(1) { transition-delay: 0s; }
+  .footer-column.animate-on-scroll:nth-child(2) { transition-delay: 0.1s; }
+  
+  .footer-bottom.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
+  
+  .footer-bottom.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .footer-brand-text.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                visibility 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+  
+  .footer-brand-text.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  
+  /* ============================================
+     8. ОБЩИЕ ЭЛЕМЕНТЫ (все страницы)
+     ============================================ */
+  
+  /* Заголовки страниц */
+  .page-title {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: titleFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  @keyframes titleFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Вводный текст */
+  .page-intro {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: introFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+  }
+  
+  @keyframes introFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Кнопки — ВИДНЫ СРАЗУ */
+  .btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                background 0.15s ease-out;
+  }
+  
+  .btn.animate-on-scroll {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+  
+  .btn.animate-on-scroll.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .btn:hover {
+    transform: translateY(-1px) scale(1.03);
+  }
+  
+  .btn:active {
+    transform: translateY(0) scale(1);
+  }
+  
+  
+  /* ============================================
+     9. МОДАЛЬНЫЕ ОКНА И ЛАЙТБОКС
+     ============================================ */
+  
+  /* Лайтбокс плавное появление */
+  .lightbox {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  .lightbox.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Изображение в лайтбоксе */
+  .lightbox-image-wrapper img {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+  }
+  
+  .lightbox.is-visible .lightbox-image-wrapper img {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  
+  /* ============================================
+     10. ОТКЛЮЧЕНИЕ АНИМАЦИЙ
+     ============================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    .featured-item,
+    .product-card,
+    .fabric-card,
+    .intro-column,
+    .about-brand-image,
+    .about-brand-content,
+    .scroll-image-item,
+    .product-info,
+    .measurements-image,
+    .measurements-text,
+    .delivery-card,
+    .footer-logo,
+    .footer-column,
+    .footer-brand-text,
+    .btn,
+    .sizes-table-wrapper,
+    .fabrics-category,
+    .fabric-item,
+    .delivery-list li {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: none !important;
+    }
+  }
+/* =================================
+   LOADING SCREEN — РОМАШКА
+================================= */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: #e6e6e6;
+  background-image: url("images/about/serye-tekstury.webp");
+  background-size: 2000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 40px;
+}
+
+/* Логотип */
+.loading-logo-minimal {
+  font-family: "TD Vyazbit", "Fragment Mono", monospace;
+  font-size: clamp(16px, 3vw, 40px);
+  letter-spacing: 0.3em;
+  color: #2c2c2c;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: logoAppear 0.6s ease forwards;
+}
+
+@keyframes logoAppear {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ромашка */
+.loading-daisy {
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  animation: daisyAppear 0.5s ease 0.2s forwards, daisySpin 1.5s linear infinite 0.4s;
+}
+
+.daisy-petals {
+  transform-origin: center;
+}
+
+@keyframes daisyAppear {
+  to {
+    opacity: 0.9;
+  }
+}
+
+@keyframes daisySpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Исчезновение */
+.loading-screen.is-hidden .loading-content {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 768px) {
+  .loading-content {
+    gap: 28px;
+  }
+  
+  .loading-logo-minimal {
+    font-size: 25px;
+    letter-spacing: 0.25em;
+  }
+  
+  .loading-daisy {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Уважение к prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .loading-logo-minimal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .loading-daisy {
+    animation: daisyAppear 0.5s ease 0.2s forwards;
+    opacity: 0.9;
+  }
+}
