@@ -1,84 +1,138 @@
 <!doctype html>
 <html lang="ru">
   <head>
+    <!-- Кодировка и viewport первыми -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     
-    <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mashroom.space/">
-<meta property="og:title" content="MASHROOM | Пошив одежды на заказ">
-<meta property="og:description" content="Индивидуальный пошив одежды из натуральных тканей. Ручная работа, традиционный крой, slow fashion.">
-<meta property="og:image" content="https://mashroom.space/images/ui/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="ru_RU">
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://mashroom.space/">
-<meta name="twitter:title" content="MASHROOM | Пошив одежды на заказ">
-<meta name="twitter:description" content="Индивидуальный пошив одежды из натуральных тканей. Ручная работа, традиционный крой.">
-<meta name="twitter:image" content="https://mashroom.space/images/ui/og-image.png">
-
-    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
-
+    <!-- Базовые SEO-метатеги -->
+    <title>MASHROOM | Пошив одежды на заказ</title>
+    <meta name="description" content="Пошив одежды на заказ из хлопка, льна, тенселя. Ручная работа, традиционный крой, slow fashion. Индивидуальные мерки, доставка по России.">
+    <meta name="keywords" content="пошив одежды на заказ, натуральные ткани, индивидуальный пошив, ручная работа, slow fashion, одежда из льна, одежда из хлопка, пошив Екатеринбург, традиционный крой">
+    <meta name="author" content="MASHROOM">
+    <meta name="robots" content="index, follow">
+    <meta name="yandex-verification" content="ваш-код-подтверждения">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mashroom.space/">
+    
+    <!-- Open Graph для VK/Telegram/WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mashroom.space/">
+    <meta property="og:title" content="MASHROOM — Пошив одежды из натуральных тканей">
+    <meta property="og:description" content="Индивидуальный пошив на заказ. Хлопок, лён, тенсель. Ручная работа в Екатеринбурге.">
+    <meta property="og:image" content="https://mashroom.space/images/ui/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="MASHROOM">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/ui/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="images/ui/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/ui/favicon-16.png">
     <link rel="apple-touch-icon" href="images/ui/apple-touch-icon.png">
-
-    <link rel="icon" href="images/ui/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/ui/favicon.ico" type="image/x-icon">
-     
-        <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>MASHROOM | Пошив одежды на заказ из натуральных тканей</title>
-    <meta name="description" content="Индивидуальный пошив одежды из натуральных тканей: хлопок, тенсель, батист. Ручная работа, экологичный подход, изделия по вашим меркам.">
-    <meta name="keywords" content="пошив одежды на заказ, натуральные ткани, индивидуальный пошив, slow fashion, одежда ручной работы">
-  
+    
+    <!-- Мобильные настройки -->
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <meta name="theme-color" content="#e6e6e6">
+    
+    <!-- Preconnect для скорости -->
+    <link rel="preconnect" href="https://mc.yandex.ru">
+    
+    <!-- Стили -->
     <link rel="stylesheet" href="styles.css">
-  </head>
-
-  <script type="application/ld+json">
+    
+    <!-- Schema.org JSON-LD (исправленный) -->
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "name": "Mashroom",
+      "name": "MASHROOM",
+      "alternateName": "Машина Комната",
       "url": "https://mashroom.space",
-      "description": "Индивидуальный пошив одежды из натуральных тканей.",
-      "areaServed": "Russia"
-      "address":{
-        "@type":"PostalAddress",
-        "addressLocality":"Екатеринбург"}
+      "logo": "https://mashroom.space/images/ui/logo.png",
+      "image": "https://mashroom.space/images/about/aboutMasha.jpg",
+      "description": "Индивидуальный пошив одежды из натуральных тканей. Ручная работа, традиционный крой, slow fashion.",
+      "priceRange": "₽₽",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Россия"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Екатеринбург",
+        "addressCountry": "RU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "56.8389",
+        "longitude": "60.6057"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Маша Холодная"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "mashroom.clo@mail.ru",
+        "availableLanguage": ["Russian"]
+      },
+      "sameAs": [
+        "https://vk.com/roommashroom",
+        "https://t.me/roommashroom"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Услуги пошива",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Пошив блузок и рубашек"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Пошив платьев и сарафанов"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Пошив брюк и юбок"
+            }
+          }
+        ]
+      }
     }
     </script>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-  (function(m,e,t,r,i,k,a){
-      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-      m[i].l=1*new Date();
-      for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107002562', 'ym');
-
-  ym(107002562, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/107002562" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
+    
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+      (function(m,e,t,r,i,k,a){
+          m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+          m[i].l=1*new Date();
+          for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+          k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+      })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=107002562','ym');
+      ym(107002562, 'init', {clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true});
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/107002562" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  </head>
 
   <body>
-
+    <!-- Экран загрузки только для главной -->
     <div class="loading-screen" id="loadingScreen">
       <div class="loading-content">
-        <!-- Логотип -->
         <div class="loading-logo-minimal">MASHROOM</div>
-        
-        <!-- Крутящаяся ромашка -->
         <svg class="loading-daisy" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <!-- Центр ромашки -->
           <circle cx="30" cy="30" r="6" fill="#2c2c2c"/>
-          <!-- Лепестки -->
           <g class="daisy-petals">
             <ellipse cx="30" cy="12" rx="4" ry="10" fill="#2c2c2c"/>
             <ellipse cx="30" cy="48" rx="4" ry="10" fill="#2c2c2c"/>
@@ -94,7 +148,9 @@
     </div>
     
     <div class="page">
+      <!-- Шапка -->
       <header class="site-header">
+       
         <div class="container site-header-inner">
 
           <div class="mobile-logo">
