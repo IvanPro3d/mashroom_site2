@@ -1469,6 +1469,15 @@ button {
       background-image: url("images/ui/tabletGlavnaya.png");
       min-height: 70vh;
     }
+
+    @media (orientation: landscape){
+
+      .hero-full-image {
+        content: url("images/ui/tabletGlavnaya.png");
+        height: auto;
+        width: 100%;
+      }
+    }
   
     .hero-full-overlay {
       padding: 40px 60px;
@@ -2109,7 +2118,19 @@ button {
     }
   }
 
+
+
 @media (max-width: 767px) {
+
+  @media (orientation: landscape){
+
+    .hero-full-image {
+      content: url("images/ui/hero-horizontal.png");
+      height: auto;
+      width: 100%;
+    }
+  }
+
   .footer-logo {
     margin-top: 30px;
   }
@@ -2146,6 +2167,8 @@ button {
     width: 100%;
     object-fit: cover;
   }
+
+  
 
   .body {
     padding-top: 47px;
@@ -3478,3 +3501,42 @@ a:focus {
 .page .loading-logo-minimal {
   display: none !important;
 }
+
+/* Плавные переходы всюду */
+a, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Эффект поднятия при наведении на карточки товаров */
+.product-card:hover,
+.featured-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+/* Кнопки — инверсия цвета */
+.btn:hover {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Плейсхолдер до загрузки */
+img {
+  background: linear-gradient(90deg, #e6e6e6 25%, #d9d9d9 50%, #e6e6e6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Убрать анимацию после загрузки */
+img[src] {
+  animation: none;
+  background: none;
+}
+
+
