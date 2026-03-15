@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta name="format-detection" content="telephone=no,email=no,address=no,date=no">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/ui/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/ui/favicon-16.png">
+    <link rel="apple-touch-icon" href="images/ui/apple-touch-icon.png">
+    <link rel="icon" href="images/ui/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/ui/favicon.ico" type="image/x-icon">
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>MASHROOM | 404 страница не найдена</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- ВСЕ СТИЛИ 404 ЗДЕСЬ -->
+    <style>
+      /* =================================
+         БАЗОВЫЕ НАСТРОЙКИ (только для 404)
+      ================================= */
+      
+      @font-face {
+        font-family: 'TD Vyazbit';
+        src: url('fonts/TD-VYAZBIT.woff') format('woff');
+        font-weight: 400;
+        font-display: swap;
+      }
+      
+      @font-face {
+        font-family: 'Fragment Mono';
+        src: url('fonts/FRAGMENTMONO-REGULAR.woff') format('woff');
+        font-weight: 400;
+        font-display: swap;
+      }
+      
+      /* Для 404 страницы — скрываем основной контент */
+      .page {
+        display: none;
+      }
+      
+      body {
+        height: 100%;
+        background: #e6e6e6 !important;
+        color: #252525;
+        font-family: 'Fragment Mono', monospace;
+        overflow: hidden;
+        user-select: none;
+      }
+      
+      /* =================================
+         ШАПКА — используем стили из styles.css,
+         но добавляем недостающие для мобильного меню
+      ================================= */
+      
+      /* Мобильное меню — стили для 404 */
+      @media (max-width: 1199px) {
+        .main-nav {
+          position: fixed;
+          top: 47px;
+          left: 0;
+          width: 100%;
+          flex-direction: column;
+          align-items: center;
+          gap: 24px;
+          background: #e6e6e6;
+          padding: 40px 20px;
+          transform: translateY(-10px);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.25s ease, transform 0.25s ease;
+          display: flex;
+          z-index: 99;
+        }
+        
+        .main-nav.is-open {
+          opacity: 1;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+        
+        .nav-toggle {
+          display: flex !important;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          padding: 0;
+        }
+        
+        .nav-toggle span,
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: #252525;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+          content: "";
+          position: absolute;
+          left: 0;
+        }
+        
+        .nav-toggle span::before { top: -6px; }
+        .nav-toggle span::after { top: 6px; }
+        
+        .nav-toggle.is-active span {
+          background: transparent;
+        }
+        
+        .nav-toggle.is-active span::before {
+          top: 0;
+          transform: rotate(45deg);
+        }
+        
+        .nav-toggle.is-active span::after {
+          top: 0;
+          transform: rotate(-45deg);
+        }
+      }
+      
+      /* =================================
+         ИГРОВОЙ КАНВАС И UI
+      ================================= */
+      
+      #gameCanvas {
+  position: fixed;
+  inset: 47px 0 0 0;
+  width: 100%;
+  height: calc(100% - 47px);
+  cursor: none;
+  background: #e6e6e6; /* ← добавьте это */
+}
+      
+      .game-ui {
+        position: fixed;
+        pointer-events: none;
+        z-index: 50;
+      }
+      
+      .score-display {
+        top: 67px;
+        left: 20px;
+        font-family: "TD Vyazbit", monospace;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+        color: #595959;
+      }
+      
+      .score-display span {
+        color: #252525;
+        font-size: 18px;
+      }
+      
+      .instructions {
+        bottom: 140px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 15px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: #595959;
+        opacity: 0.7;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 0.8; }
+      }
+      
+      .error-center {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        pointer-events: none;
+        z-index: 40;
+      }
+      
+      .error-code {
+        font-family: 'TD Vyazbit', monospace;
+        font-size: clamp(100px, 20vw, 240px);
+        letter-spacing: 0.02em;
+        line-height: 0.85;
+        color: #252525;
+        opacity: 0.1;
+      }
+      
+      .error-message {
+        font-family: 'TD Vyazbit', monospace;
+        font-size: 25px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #595959;
+        margin-top: 20px;
+      }
+      
+      @media (max-width: 768px) {
+        .instructions { font-size: 12px; bottom: 160px; }
+        .error-code { font-size: 80px; }
+        .error-message { font-size: 16px; }
+      }
+      
+      @media (prefers-reduced-motion: reduce) {
+        .instructions { animation: none; }
+      }
+
+    </style>
+  </head>
+  
+  <!-- ТЕЛО ДОКУМЕНТА — ОДНО, БЕЗ ДУБЛЕЙ -->
+  <body>
+    
+    <!-- ШАПКА — ОДНА -->
+    <header class="site-header">
+      <div class="container site-header-inner">
+        <div class="mobile-logo">
+          <img src="images/ui/04logo.png" alt="Mashroom logo">
+        </div>
+        
+        <nav class="main-nav">
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="measurements.html">Мерки</a>
+          <a href="fabrics.html">Ткани</a>
+          <a href="delivery.html">Заказ и доставка</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+        
+        <button class="nav-toggle" type="button" aria-label="Меню">
+          <span></span>
+        </button>
+      </div>
+    </header>
+    
+    <!-- ИГРА -->
+    <canvas id="gameCanvas"></canvas>
+    
+    <div class="game-ui score-display">
+      Лепестков: <span id="score">0</span> / <span id="total">12</span>
+    </div>
+    
+    <div class="game-ui instructions">
+      Собери все лепестки — ромашка расцветет
+    </div>
+    
+    <div class="error-center">
+      <div class="error-code">404</div>
+      <div class="error-message">Страница не найдена</div>
+    </div>
+    
+    <!-- СКРИПТЫ -->
+    <script>
+      // ============================================
+      // МОБИЛЬНОЕ МЕНЮ — ГАМБУРГЕР
+      // ============================================
+      
+      (function() {
+        const navToggle = document.querySelector('.nav-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        
+        if (!navToggle || !mainNav) {
+          console.error('Menu elements not found');
+          return;
+        }
+        
+        console.log('Menu initialized'); // Для отладки
+        
+        navToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          console.log('Hamburger clicked'); // Для отладки
+          mainNav.classList.toggle('is-open');
+          navToggle.classList.toggle('is-active');
+        });
+        
+        mainNav.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            mainNav.classList.remove('is-open');
+            navToggle.classList.remove('is-active');
+          });
+        });
+        
+        document.addEventListener('click', function(e) {
+          if (!mainNav.contains(e.target) && !navToggle.contains(e.target)) {
+            mainNav.classList.remove('is-open');
+            navToggle.classList.remove('is-active');
+          }
+        });
+      })();
+
+    // ============================================
+    // ИГРА: РОМАШКА БЕЗ ХВОСТА, БЕЗ ФОНА
+    // ============================================
+    
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Состояние
+    let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    
+    // Наша ромашка
+    const player = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+      vx: 0,
+      vy: 0,
+      offsetX: 0,
+      offsetY: 0,
+      centerRadius: 8,
+      petals: [],
+      rotation: 0,
+      targetRotation: 0
+    };
+    
+    // Летающие лепестки
+    const floatingPetals = [];
+    const totalPetals = 12;
+    
+    function initPetals() {
+      for (let i = 0; i < totalPetals; i++) {
+        floatingPetals.push({
+          x: Math.random() * (canvas.width - 100) + 50,
+          y: Math.random() * (canvas.height - 100) + 50,
+          angle: Math.random() * Math.PI * 2,
+          length: 16 + Math.random() * 6,
+          width: 4 + Math.random() * 2,
+          rotationSpeed: (Math.random() - 0.5) * 0.04,
+          floatSpeed: 0.5 + Math.random() * 0.7,
+          floatAngle: Math.random() * Math.PI * 2,
+          opacity: 0.6 + Math.random() * 0.4,
+          collected: false,
+          flyProgress: 0,
+          added: false
+        });
+      }
+    }
+    
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight - 47;
+    }
+    
+    // Отрисовка лепестка
+    function drawPetal(x, y, length, width, angle, opacity, scale = 1) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.scale(scale, scale);
+      ctx.globalAlpha = opacity;
+      
+      ctx.beginPath();
+      ctx.ellipse(0, -length, width, length, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#2c2c2c';
+      ctx.fill();
+      
+      ctx.restore();
+    }
+    
+    // Отрисовка ромашки — БЕЗ ЛИШНЕГО, БЕЗ ФОНА
+    function drawPlayer() {
+      ctx.save();
+      
+      // Позиция с заворачиванием
+      ctx.translate(player.x + player.offsetX, player.y + player.offsetY);
+      ctx.rotate(player.rotation);
+      
+      // Рисуем собранные лепестки
+      player.petals.forEach((petal, i) => {
+        const angle = (Math.PI * 2 / player.petals.length) * i;
+        drawPetal(0, 0, petal.length, petal.width, angle, 1);
+      });
+      
+      // Центр — ТОЛЬКО КРУЖОК, без фона
+      ctx.beginPath();
+      ctx.arc(0, 0, player.centerRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#252525';
+      ctx.fill();
+      
+      // Тонкое свечение только при старте (не фон, а обводка)
+      if (player.petals.length === 0) {
+        ctx.beginPath();
+        ctx.arc(0, 0, player.centerRadius + 3, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(37, 37, 37, 0.1)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      
+      ctx.restore();
+    }
+    
+    // Отрисовка летающего лепестка
+    function drawFloatingPetal(p) {
+      if (p.collected) {
+        const dx = player.x - p.x;
+        const dy = player.y - p.y;
+        
+        p.x += dx * 0.15;
+        p.y += dy * 0.15;
+        p.flyProgress += 0.1;
+        
+        const scale = Math.max(0.2, 1 - p.flyProgress * 0.8);
+        drawPetal(p.x, p.y, p.length, p.width, p.angle, 1 - p.flyProgress * 0.3, scale);
+        
+        if (p.flyProgress >= 1 && !p.added) {
+          p.added = true;
+          player.petals.push({
+            length: p.length,
+            width: p.width
+          });
+          updateScore();
+        }
+        return;
+      }
+      
+      // Плавание
+      p.floatAngle += p.floatSpeed * 0.02;
+      p.x += Math.cos(p.floatAngle) * 0.6;
+      p.y += Math.sin(p.floatAngle) * 0.4;
+      p.angle += p.rotationSpeed;
+      
+      // Отскок
+      if (p.x < 30) { p.x = 30; p.floatAngle = Math.PI - p.floatAngle; }
+      if (p.x > canvas.width - 30) { p.x = canvas.width - 30; p.floatAngle = Math.PI - p.floatAngle; }
+      if (p.y < 30) { p.y = 30; p.floatAngle = -p.floatAngle; }
+      if (p.y > canvas.height - 30) { p.y = canvas.height - 30; p.floatAngle = -p.floatAngle; }
+      
+      drawPetal(p.x, p.y, p.length, p.width, p.angle, p.opacity);
+    }
+    
+    function updateScore() {
+      document.getElementById('score').textContent = player.petals.length;
+      
+      if (player.petals.length >= totalPetals) {
+        const instr = document.querySelector('.instructions');
+        instr.textContent = 'Ваша ромашка расцвела!';
+        instr.style.color = '#2c2c2c';
+        instr.style.animation = 'none';
+        instr.style.opacity = '1';
+      }
+    }
+    
+    // Обновление позиции с заворачиванием
+    function updatePlayer() {
+      const dx = mouse.x - player.x;
+      const dy = mouse.y - player.y;
+      
+      // Физика
+      player.vx += dx * 0.08;
+      player.vy += dy * 0.08;
+      player.vx *= 0.88;
+      player.vy *= 0.88;
+      
+      player.x += player.vx * 0.1;
+      player.y += player.vy * 0.1;
+      
+      // Заворачивание
+      const targetOffsetX = -player.vx * 0.25;
+      const targetOffsetY = -player.vy * 0.25;
+      player.offsetX += (targetOffsetX - player.offsetX) * 0.12;
+      player.offsetY += (targetOffsetY - player.offsetY) * 0.12;
+      
+      const maxOffset = 12;
+      player.offsetX = Math.max(-maxOffset, Math.min(maxOffset, player.offsetX));
+      player.offsetY = Math.max(-maxOffset, Math.min(maxOffset, player.offsetY));
+      
+      // Вращение
+      const speed = Math.sqrt(player.vx * player.vx + player.vy * player.vy);
+      if (speed > 0.5) {
+        player.targetRotation = Math.atan2(player.vy, player.vx) + Math.PI / 2;
+      }
+      
+      let rotDiff = player.targetRotation - player.rotation;
+      while (rotDiff > Math.PI) rotDiff -= Math.PI * 2;
+      while (rotDiff < -Math.PI) rotDiff += Math.PI * 2;
+      player.rotation += rotDiff * 0.06;
+      player.rotation += 0.002;
+      
+      // Ограничение краёв
+      const margin = 50;
+      player.x = Math.max(margin, Math.min(canvas.width - margin, player.x));
+      player.y = Math.max(margin, Math.min(canvas.height - margin, player.y));
+    }
+    
+    function checkCollisions() {
+      floatingPetals.forEach(p => {
+        if (p.collected) return;
+        
+        const dx = player.x - p.x;
+        const dy = player.y - p.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < 35) {
+          p.collected = true;
+        }
+      });
+    }
+    
+    // Главный цикл — ОДНА ОЧИСТКА В НАЧАЛЕ
+    function animate() {
+      // ОЧИЩАЕМ ВЕСЬ КАНВАС ОДИН РАЗ
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Фоновая сетка (опционально — можно убрать)
+      ctx.strokeStyle = 'rgba(37, 37, 37, 0.02)';
+      ctx.lineWidth = 1;
+      const gridSize = 80;
+      
+      for (let x = 0; x < canvas.width; x += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+        ctx.stroke();
+      }
+      
+      for (let y = 0; y < canvas.height; y += gridSize) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+      
+      // Обновление и отрисовка
+      updatePlayer();
+      checkCollisions();
+      
+      // Сначала летающие лепестки
+      floatingPetals.forEach(drawFloatingPetal);
+      
+      // Потом игрок — один раз, без дублей
+      drawPlayer();
+      
+      requestAnimationFrame(animate);
+    }
+    
+    // Управление
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      mouse.x = touch.clientX - rect.left;
+      mouse.y = touch.clientY - rect.top;
+    }, { passive: false });
+    
+    canvas.addEventListener('touchstart', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      mouse.x = touch.clientX - rect.left;
+      mouse.y = touch.clientY - rect.top;
+    });
+    
+    // Инициализация
+    window.addEventListener('resize', resize);
+    resize();
+    initPetals();
+    animate();
+    
+    setTimeout(() => {
+      if (player.petals.length < totalPetals) {
+        document.querySelector('.instructions').style.opacity = '0.3';
+      }
+    }, 4000);
+
+    
+    
+  </script>
+  
+</body>
+</html>

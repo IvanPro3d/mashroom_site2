@@ -196,6 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  
+
   // --- Чекбокс согласия ---
   (function() {
     const consent = document.getElementById("consent");
@@ -284,3 +286,4 @@ document.querySelectorAll('.btn').forEach(btn => {
 
 
 }); // Конец DOMContentLoaded
+

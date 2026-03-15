@@ -369,7 +369,7 @@ body {
 }
 
 .featured-item {
-  height: 600px;
+  height: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1708,7 +1708,7 @@ button {
     }
   
     .scroll-images {
-      display: flex;
+      display: none;
       flex-direction: row;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
@@ -1717,11 +1717,13 @@ button {
       width: 100%;
       max-width: 600px;
       margin: 0 auto;
+      scroll-behavior: smooth;
     }
   
     .scroll-image-item {
       min-width: 100%;
-      scroll-snap-align: start;
+      flex: 0 0 100%;
+      scroll-snap-align: center;
       flex-shrink: 0;
       display: flex;
       justify-content: center;
@@ -2944,12 +2946,11 @@ a:focus {
     overflow: hidden;
     opacity: 0;
     transform: translateY(-10px);
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.35s ease,
-                transform 0.35s ease;
+    transition: max-height 0.45s ease, opacity 0.35s ease;
   }
   
   .product-details-item.is-open .product-details-content {
+    
     opacity: 1;
     transform: translateY(0);
   }
@@ -3538,5 +3539,49 @@ img[src] {
   animation: none;
   background: none;
 }
+/* =================================
+   ОТКЛЮЧЕНИЕ АНИМАЦИЙ НА МОБИЛЬНЫХ
+================================= */
 
+@media (max-width: 1199px) {
+
+  /* убираем snap-скролл */
+  .featured-grid {
+    scroll-snap-type: none !important;
+    overflow: visible !important;
+  }
+
+  .featured-item {
+    scroll-snap-align: none !important;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+
+    transition: none !important;
+  }
+
+  /* убираем анимацию появления */
+  .featured-item.animate-on-scroll {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .featured-item.animate-on-scroll.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* убираем zoom картинки */
+  .featured-item img {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .featured-item:hover img {
+    transform: none !important;
+  }
+
+}
 
